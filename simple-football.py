@@ -57,6 +57,64 @@ def playerStartGame(passCount): # When player has the ball
                 scoreGoal(playerHasBall)
             continue
 
+def computerStartGame(passCount): # When computer has the ball
+    playerHasBall = False
+    while(True):
+        playerPassBall = int(input('\nEnter a number (1-4): '))
+        computerPassBall = random.randint(1, 4)
+        print('computer pass =', computerPassBall)
+        if (playerPassBall == computerPassBall):
+            passCount = 0
+            print('Player received the ball.')
+            playerStartGame(passCount)
+        elif (playerPassBall != computerPassBall):
+            passCount += 1
+            print(f"{passCount} defense unsuccessful.")
+            if (passCount == 4):
+                print('Time to score a goal for the computer.')
+                passCount = 0
+                scoreGoal(playerHasBall)
+            continue
+
+def scoreGoal(playerHasBall): # After the player or computer has reached 4 passes
+    if (playerHasBall):
+        playerPassBall = int(input('\nEnter a number (5 or 6): '))
+        computerPassBall = random.randint(5, 6)
+        print('computer pass =', computerPassBall)
+        if (playerPassBall != computerPassBall):
+            print('You have scored a GOAAALLLLL!!!')
+            displayScore(True)
+            computerStartGame(passCount)
+        elif (playerPassBall == computerPassBall):
+            print('The ball was saved by the computer.')
+            computerStartGame(passCount)
+            
+    elif (not playerHasBall):
+        playerPassBall = int(input('\nEnter a number (5 or 6): '))
+        computerPassBall = random.randint(5, 6)
+        print('computer pass =', computerPassBall)
+        if (playerPassBall != computerPassBall):
+            print('Computer has scored a GOAAALLLLL!!!')
+            displayScore(False)
+            playerStartGame(passCount)
+        elif (playerPassBall == computerPassBall):
+            print('The ball was saved by the player.')
+            playerStartGame(passCount)
+   
+score = {
+    'player': 0,
+    'computer': 0
+}
+
+def displayScore(point): # Updation of score after goal
+          
+    if (point):
+        score["player"] += 1
+    elif (not point):
+        score["computer"] += 1
+        
+    print(score)
+    
 selection = footOrBallSelection()
 if (selection == 'ball'):
     print('Player has the ball.')
