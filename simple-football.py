@@ -37,3 +37,30 @@ def footOrBallSelection():
             userFootBall = input('You get to play first. Choose (foot/ball): ')
             # print(userFootBall)
             return userFootBall
+        
+def playerStartGame(passCount): # When player has the ball
+    playerHasBall = True
+    while(True):
+        playerPassBall = int(input('\nEnter a number (1-4): '))
+        computerPassBall = random.randint(1, 4)
+        print('computer pass =', computerPassBall)
+        if (playerPassBall == computerPassBall):
+            passCount = 0
+            print('Computer received the ball.')
+            computerStartGame(passCount)
+        elif (playerPassBall != computerPassBall):
+            passCount += 1
+            print(f"{passCount} pass successful.")
+            if (passCount == 4):
+                print('Time to score a goal for the player.')
+                passCount = 0
+                scoreGoal(playerHasBall)
+            continue
+
+selection = footOrBallSelection()
+if (selection == 'ball'):
+    print('Player has the ball.')
+    playerStartGame(passCount)
+elif (selection == 'BALL' or selection == 'foot'):
+    print('Computer has the ball.')
+    computerStartGame(passCount)
