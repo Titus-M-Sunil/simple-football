@@ -1,3 +1,21 @@
+"""
+===================================================== GAME RULES =====================================================
+1. User is asked to choose odd or even.
+2. If the outcome was equal to User's choice, they receive the ball.
+3. If the outcome was the opposite, Computer receives the ball.
+4. After the game has started, User and Computer gets to choose numbers 1 to 4.
+5. When the choices of User and Computer does not match, the ball is passed to the next player of respective team.
+6. When the choices of User and Computer is equal the ball is blocked and is received by who did not have the ball.
+7. The ball can be passed upto four times by either teams after which it is time to score the goal.
+8. At the time of goal scoring the number choices is reduced to only 5 or 6 as the inputs.
+9. This means there is always a 50/50 chance to score a goal.
+10. When the User scores a goal, the scoreboard is updated and the game restarts with ball belonging to Computer.
+11. Vice versa if the Computer scores a goal.
+12. When the User's ball is saved by the Computer, game restarts with ball belonging to Computer.
+13. Vice versa if the User saves a goal.
+======================================================================================================================
+"""
+
 import random
 
 # Number of times player/computer has passed the ball
@@ -38,33 +56,33 @@ print('Computer chose', computerInput)
 # Calculation to check if sum of computer and player input is odd/even
 calculation = (computerInput + userInput) % 2
 
+# Function for choosing who gets the ball first
 def footOrBallSelection():
     if (calculation == 0): # even
         print('Outcome was even')
         if (userOddEven == 'even'):
-            userFootBall = input('You get to play first. Choose (foot/ball): ')
-            # print(userFootBall)
-            return userFootBall
+            print('You get the ball first.')
+            return 'ball'
         elif (userOddEven == 'odd'):
-            print('Computer plays first.')
+            print('Computer gets the ball first.')
             return 'BALL'
         
     elif (calculation != 0): # odd
         print('Outcome was odd')
         if (userOddEven == 'even'):
-            print('Computer plays first.')
+            print('Computer gets the ball first.')
             return 'BALL'
         elif (userOddEven == 'odd'):
-            userFootBall = input('You get to play first. Choose (foot/ball): ')
-            # print(userFootBall)
-            return userFootBall
-        
-def playerStartGame(passCount): # When player has the ball
+            print('You get the ball first.')
+            return 'ball'
+
+# When player has the ball 
+def playerStartGame(passCount): 
     playerHasBall = True
     while(True):
         playerPassBall = userInputFunction()
         computerPassBall = random.randint(1, 4)
-        print('computer pass =', computerPassBall)
+        print('Computer choice =', computerPassBall)
         if (playerPassBall == computerPassBall):
             passCount = 0
             print('Computer received the ball.')
@@ -78,12 +96,13 @@ def playerStartGame(passCount): # When player has the ball
                 scoreGoal(playerHasBall)
             continue
 
-def computerStartGame(passCount): # When computer has the ball
+# When computer has the ball
+def computerStartGame(passCount): 
     playerHasBall = False
     while(True):
         playerPassBall = userInputFunction()
         computerPassBall = random.randint(1, 4)
-        print('computer pass =', computerPassBall)
+        print('Computer choice =', computerPassBall)
         if (playerPassBall == computerPassBall):
             passCount = 0
             print('Player received the ball.')
@@ -101,7 +120,7 @@ def scoreGoal(playerHasBall): # After the player or computer has reached 4 passe
     if (playerHasBall):
         playerPassBall = int(input('\nEnter a number (5 or 6): '))
         computerPassBall = random.randint(5, 6)
-        print('computer pass =', computerPassBall)
+        print('Computer choice =', computerPassBall)
         if (playerPassBall != computerPassBall):
             print('You have scored a GOAAALLLLL!!!')
             displayScore(True)
@@ -113,7 +132,7 @@ def scoreGoal(playerHasBall): # After the player or computer has reached 4 passe
     elif (not playerHasBall):
         playerPassBall = int(input('\nEnter a number (5 or 6): '))
         computerPassBall = random.randint(5, 6)
-        print('computer pass =', computerPassBall)
+        print('Computer choice =', computerPassBall)
         if (playerPassBall != computerPassBall):
             print('Computer has scored a GOAAALLLLL!!!')
             displayScore(False)
@@ -138,8 +157,6 @@ def displayScore(point): # Updation of score after goal
     
 selection = footOrBallSelection()
 if (selection == 'ball'):
-    print('Player has the ball.')
     playerStartGame(passCount)
-elif (selection == 'BALL' or selection == 'foot'):
-    print('Computer has the ball.')
+elif (selection == 'BALL'):
     computerStartGame(passCount)
