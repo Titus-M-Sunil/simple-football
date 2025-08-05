@@ -15,16 +15,19 @@ while (userOddEven == ""):
 
 print('You chose', userOddEven)
 
-# Number input (from 1 to 4) to decide if the outcome is odd/even
+# Number input function (from 1 to 4) 
 def userInputFunction():
     userInput = 0
     while (userInput == 0 or userInput == ""):
-        userInput = input('\nEnter a number (1-4): ')
-        if (int(userInput) > 0 and int(userInput) < 5):
-            return int(userInput)
-        else:
-            print("Invalid input, you can only choose number 1 to 4.")
-            userInput = 0
+        try:
+            userInput = input('\nEnter a number (1-4): ')
+            if (int(userInput) > 0 and int(userInput) < 5):
+                return int(userInput)
+            else:
+                print("Invalid input, you can only choose number 1 to 4.")
+                userInput = 0
+        except ValueError:
+            print("Invalid input! You must enter a number.")
 
 userInput = userInputFunction()
 
