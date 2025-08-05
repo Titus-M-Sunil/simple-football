@@ -2,13 +2,31 @@ import random
 
 # Number of times player/computer has passed the ball
 passCount = 0
+userOddEven = ""
 
 # User input to choose odd/even
-userOddEven = input('Choose odd/even: ')
+while (userOddEven == ""):
+    userOddEven = input('Choose odd/even: ')
+    if (userOddEven == "odd" or userOddEven == "even"):
+        break
+    else:
+        print("Invalid input.\n")
+        userOddEven = ""
+
 print('You chose', userOddEven)
 
 # Number input (from 1 to 4) to decide if the outcome is odd/even
-userInput = int(input('\nEnter a number (1-4): '))
+def userInputFunction():
+    userInput = 0
+    while (userInput == 0 or userInput == ""):
+        userInput = input('\nEnter a number (1-4): ')
+        if (int(userInput) > 0 and int(userInput) < 5):
+            return int(userInput)
+        else:
+            print("Invalid input, you can only choose number 1 to 4.")
+            userInput = 0
+
+userInput = userInputFunction()
 
 # Computer number input (from 1 to 4) is chosen randomly
 computerInput = random.randint(1, 4)
@@ -41,7 +59,7 @@ def footOrBallSelection():
 def playerStartGame(passCount): # When player has the ball
     playerHasBall = True
     while(True):
-        playerPassBall = int(input('\nEnter a number (1-4): '))
+        playerPassBall = userInputFunction()
         computerPassBall = random.randint(1, 4)
         print('computer pass =', computerPassBall)
         if (playerPassBall == computerPassBall):
@@ -60,7 +78,7 @@ def playerStartGame(passCount): # When player has the ball
 def computerStartGame(passCount): # When computer has the ball
     playerHasBall = False
     while(True):
-        playerPassBall = int(input('\nEnter a number (1-4): '))
+        playerPassBall = userInputFunction()
         computerPassBall = random.randint(1, 4)
         print('computer pass =', computerPassBall)
         if (playerPassBall == computerPassBall):
