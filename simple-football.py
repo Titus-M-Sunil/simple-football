@@ -31,7 +31,7 @@ while (userOddEven == ""):
         print("Invalid input.\n")
         userOddEven = ""
 
-print('You chose', userOddEven)
+print('You choose', userOddEven)
 
 # Number input function (from 1 to 4) 
 def userInputFunction():
