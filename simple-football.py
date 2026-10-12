@@ -45,7 +45,7 @@ def userInputFunction():
                 print("Invalid input, you can only choose number 1 to 4.")
                 userInput = 0
         except ValueError:
-            print("Invalid input! You must enter a number.")
+            print("Input Invalid! You must enter a number.")
 
 userInput = userInputFunction()
 
