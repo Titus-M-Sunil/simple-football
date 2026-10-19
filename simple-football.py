@@ -28,10 +28,10 @@ while (userOddEven == ""):
     if (userOddEven == "odd" or userOddEven == "even"):
         break
     else:
-        print("Invalid input.\n")
+        print("Invalid input .\n")
         userOddEven = ""
 
-print('You chose', userOddEven)
+print('You choose', userOddEven)
 
 # Number input function (from 1 to 4) 
 def userInputFunction():
